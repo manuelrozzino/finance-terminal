@@ -134,6 +134,18 @@ def render() -> None:
     if hist.empty:
         st.warning("No price history available for this period.")
     else:
+        # Period performance: first vs last close of the selected range
+        p_start = hist["Close"].iloc[0]
+        p_end = hist["Close"].iloc[-1]
+        p_chg = p_end - p_start
+        p_pct = (p_chg / p_start * 100) if p_start else None
+        p_color = chg_color(p_chg)
+        p_arrow = "▲" if p_chg >= 0 else "▼"
+        st.markdown(
+            f"<span style='color:{p_color}; font-weight:600; font-size:0.9rem'>"
+            f"{p_arrow} {sel or '6M'}: {fmt_num(p_chg)} {currency} ({fmt_num(p_pct)}%)</span>",
+            unsafe_allow_html=True,
+        )
         fig = make_subplots(
             rows=2,
             cols=1,
