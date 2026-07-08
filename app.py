@@ -8,7 +8,7 @@ New modules are added to the MODULES dict below.
 
 import streamlit as st
 
-from modules import company
+from modules import company, macro
 
 # ------------------------------------------------------------------ page setup
 st.set_page_config(
@@ -87,8 +87,8 @@ st.markdown(
 # Register modules here. Each entry maps a sidebar label to a render function.
 MODULES = {
     "EQ — Company Overview": company.render,
+    "MACRO — Eurozone Dashboard": macro.render,
     # Roadmap — future modules plug in here:
-    # "MACRO — Dashboard": macro.render,
     # "WL — Watchlist": watchlist.render,
     # "SCR — Screener": screener.render,
 }
